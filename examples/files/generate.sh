@@ -3,3 +3,4 @@
 diff -u input.txt output1.txt > diff1.patch
 diff -u input.txt output2.txt > diff2.patch
 diff -u input.txt output3.txt > diff3.patch
+diff -u input_cmake.txt output_cmake.txt > cmake.patch

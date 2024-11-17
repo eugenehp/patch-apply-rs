@@ -18,5 +18,21 @@ pub fn apply(input: String, patch: Patch) -> String {
             }
         }
     }
+
+    let mut should_add_empty_line = false;
+
+    while old_line < old_lines.len() as u64 {
+        // TODO: fixme, this is not perfect
+        should_add_empty_line = true;
+        let line = old_lines[old_line as usize];
+        out.push(line);
+
+        old_line += 1;
+    }
+
+    if should_add_empty_line {
+        out.push("");
+    }
+
     out.join("\n")
 }
