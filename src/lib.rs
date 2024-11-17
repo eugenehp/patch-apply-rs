@@ -45,8 +45,10 @@
 
 #![deny(unused_must_use)]
 
+mod apply;
 mod ast;
 mod parser;
 
+pub use apply::*;
 pub use ast::*;
 pub use parser::ParseError;

@@ -1,4 +1,4 @@
-use patch::{File, FileMetadata, Hunk, Line, ParseError, Patch, Range};
+use patch_apply::{File, FileMetadata, Hunk, Line, ParseError, Patch, Range};
 
 use pretty_assertions::assert_eq;
 

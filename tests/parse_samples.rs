@@ -3,7 +3,7 @@ use std::path::PathBuf;
 
 use pretty_assertions::assert_eq;
 
-use patch::Patch;
+use patch_apply::Patch;
 
 #[test]
 fn parse_samples() {

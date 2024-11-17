@@ -2,7 +2,7 @@
 
 use std::{fs, path::PathBuf};
 
-use patch::{Line, Patch};
+use patch_apply::{Line, Patch};
 
 fn apply(patch: Patch, old: &str) -> String {
     let old_lines = old.lines().collect::<Vec<&str>>();
