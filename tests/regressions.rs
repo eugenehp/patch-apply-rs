@@ -41,7 +41,7 @@ fn crlf_breaks_stuff_17() -> Result<(), ParseError<'static>> {
                 range_hint: "",
                 lines: vec![Line::Context("x")],
             }],
-            end_newline: true,
+            // end_newline: true,
         }
     );
     Ok(())

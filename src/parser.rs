@@ -97,7 +97,7 @@ fn multiple_patches(input: Input<'_>) -> IResult<Input<'_>, Vec<Patch>> {
 fn patch(input: Input<'_>) -> IResult<Input<'_>, Patch> {
     let (input, files) = headers(input)?;
     let (input, hunks) = chunks(input)?;
-    let (input, no_newline_indicator) = no_newline_indicator(input)?;
+    // let (input, no_newline_indicator) = no_newline_indicator(input)?;
     // Ignore trailing empty lines produced by some diff programs
     let (input, _) = many0(line_ending)(input)?;
 
@@ -108,7 +108,7 @@ fn patch(input: Input<'_>) -> IResult<Input<'_>, Patch> {
             old,
             new,
             hunks,
-            end_newline: !no_newline_indicator,
+            // end_newline: !no_newline_indicator,
         },
     ))
 }
@@ -234,16 +234,19 @@ fn chunk_line(input: Input<'_>) -> IResult<Input<'_>, Line> {
             Line::Remove,
         ),
         map(preceded(char(' '), consume_content_line), Line::Context),
+        map(
+            preceded(tag(NO_NEWLINE_AT_END_OF_FILE), consume_content_line),
+            Line::EndOfFile,
+        ),
     ))(input)
 }
+
+const NO_NEWLINE_AT_END_OF_FILE: &str = "\\ No newline at end of file";
 
 // Trailing newline indicator
 fn no_newline_indicator(input: Input<'_>) -> IResult<Input<'_>, bool> {
     map(
-        opt(terminated(
-            tag("\\ No newline at end of file"),
-            opt(line_ending),
-        )),
+        opt(terminated(tag(NO_NEWLINE_AT_END_OF_FILE), opt(line_ending))),
         |matched| matched.is_some(),
     )(input)
 }
@@ -577,7 +580,7 @@ mod tests {
                     ],
                 },
             ],
-            end_newline: true,
+            // end_newline: true,
         };
 
         test_parser!(patch(sample) -> expected);

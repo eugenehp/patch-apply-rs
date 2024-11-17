@@ -14,11 +14,11 @@ pub struct Patch<'a> {
     pub new: File<'a>,
     /// hunks of differences; each hunk shows one area where the files differ
     pub hunks: Vec<Hunk<'a>>,
-    /// true if the last line of the file ends in a newline character
-    ///
-    /// This will only be false if at the end of the patch we encounter the text:
-    /// `\ No newline at end of file`
-    pub end_newline: bool,
+    // true if the last line of the file ends in a newline character
+    //
+    // This will only be false if at the end of the patch we encounter the text:
+    // `\ No newline at end of file`
+    // pub end_newline: bool,
 }
 
 impl<'a> fmt::Display for Patch<'a> {
@@ -31,9 +31,9 @@ impl<'a> fmt::Display for Patch<'a> {
         for hunk in &self.hunks {
             write!(f, "\n{}", hunk)?;
         }
-        if !self.end_newline {
-            write!(f, "\n\\ No newline at end of file")?;
-        }
+        // if !self.end_newline {
+        //     write!(f, "\n\\ No newline at end of file")?;
+        // }
         Ok(())
     }
 }
@@ -274,6 +274,8 @@ pub enum Line<'a> {
     Remove(&'a str),
     /// A line provided for context in the diff (unchanged); from both the old and the new file
     Context(&'a str),
+    /// End of file with an empty line
+    EndOfFile(&'a str),
 }
 
 impl<'a> fmt::Display for Line<'a> {
@@ -282,6 +284,7 @@ impl<'a> fmt::Display for Line<'a> {
             Line::Add(line) => write!(f, "+{}", line),
             Line::Remove(line) => write!(f, "-{}", line),
             Line::Context(line) => write!(f, " {}", line),
+            Line::EndOfFile(_) => write!(f, " end_of_file"),
         }
     }
 }

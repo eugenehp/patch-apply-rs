@@ -1,13 +1,17 @@
 [package]
 name = "patch"
-version = "0.7.0"
-authors = ["phil <uniphil@gmail.com>"]
+version = "0.8.0"
+authors = ["phil <uniphil@gmail.com>", "Eugene Hauptmann"]
 description = "Parse patches in the unified diff format"
-repository = "https://github.com/uniphil/patch-rs"
+repository = "https://github.com/eugenehp/patch-rs"
 readme = "README.md"
 keywords = ["patch", "diff", "parse", "nom"]
 license = "MIT"
 edition = "2018"
+
+[[example]]
+name = "apply"
+path = "./examples/apply.rs"
 
 [dependencies]
 nom = "7.1.0"
