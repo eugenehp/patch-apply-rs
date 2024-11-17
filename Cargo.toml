@@ -1,6 +1,6 @@
 [package]
 name = "patch-apply"
-version = "0.8.2"
+version = "0.8.3"
 authors = ["phil <uniphil@gmail.com>", "Eugene Hauptmann <e@eugenehp.de>"]
 description = "Parse and apply patches in the unified diff format"
 repository = "https://github.com/eugenehp/patch-apply-rs"

@@ -6,9 +6,11 @@ pub fn apply(input: String, patch: Patch) -> String {
     let mut out: Vec<&str> = vec![];
     let mut old_line = 0;
     for hunk in patch.hunks {
-        while old_line + 1 < hunk.old_range.start {
-            out.push(old_lines[old_line as usize]);
-            old_line += 1;
+        if old_lines.len() > 0 {
+            while old_line + 1 < hunk.old_range.start {
+                out.push(old_lines[old_line as usize]);
+                old_line += 1;
+            }
         }
         old_line += hunk.old_range.count;
         for line in hunk.lines {
